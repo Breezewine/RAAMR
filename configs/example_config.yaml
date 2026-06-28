@@ -1,0 +1,23 @@
+project:
+  name: RAAMR
+  task: patient_level_mammography_classification
+
+data:
+  metadata_csv: /path/to/patient_level_metadata.csv
+  structured_report_json: /path/to/structured_report_template.json
+  image_root: /path/to/ffdm_or_dbt_images
+  output_dir: /path/to/output_directory
+
+preprocessing:
+  image_height: 1024
+  image_width: 768
+  apply_clahe: true
+  normalize_to_unit_range: true
+
+evaluation:
+  threshold: 0.5
+  random_seed: 2026
+
+release_note:
+  full_model: omitted_from_public_release
+  reason: manuscript_under_review_and_private_clinical_data_governance

@@ -1,0 +1,11 @@
+numpy>=1.23
+pandas>=1.5
+torch>=2.0
+torchvision>=0.15
+timm>=0.9
+transformers>=4.35
+Pillow>=9.5
+opencv-python>=4.7
+pydicom>=2.4
+PyYAML>=6.0
+tqdm>=4.65

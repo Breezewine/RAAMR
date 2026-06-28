@@ -1,0 +1,32 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.idea/
+.vscode/
+
+# Local data and private artifacts
+data/private/
+datasets/
+checkpoints/
+weights/
+runs/
+outputs/
+logs/
+*.pt
+*.pth
+*.ckpt
+*.tar
+
+# Patient-level or local prediction artifacts
+*predictions*.csv
+*patient*.csv
+*structured_reports*.json
+processed_reports*.json
+
+# Generated figures
+figures/private/
+*.tiff
+*.svs
+*.dcm
+

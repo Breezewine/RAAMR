@@ -1,0 +1,13 @@
+[
+  {
+    "patient_id": "P000001",
+    "side": "left",
+    "birads": "4C",
+    "mass": "irregular mass",
+    "calcification": "clustered calcification",
+    "distortion": "architectural distortion",
+    "asymmetry": "none",
+    "summary": "Synthetic template record. Replace with institution-approved structured fields only."
+  }
+]
+
