@@ -1,12 +1,14 @@
 # RAAMR
 
-This repository provides a lightweight public release for the manuscript:
+This repository provides an anonymized, lightweight public release for the manuscript:
 
 **RAAMR: Reliability-Aware Asymmetric Multimodal Representation Learning for Mammography Classification**
 
-RAAMR is designed for patient-level breast mammography classification under realistic multimodal availability. The study uses four-view FFDM images, DBT-derived 2D images when available, and structured report semantics extracted from clinical radiology reports. The public repository is intended to support reproducibility checks, data-format transparency, metric verification, and figure-generation workflows.
+RAAMR is designed for patient-level breast mammography classification under realistic multimodal availability. The study uses four-view FFDM images, DBT-derived 2D images when available, and structured report semantics extracted from clinical radiology reports. The public repository is intended to support reproducibility checks, data-format transparency, metric verification, and figure-generation workflows while preserving anonymous-review requirements.
 
-> Note: The full model implementation, training objectives, checkpoints, and private clinical data are not included in this public release because the manuscript is under review and the work involves ongoing intellectual-property protection and restricted clinical data. The complete training code can be made available to reviewers under a confidential review process or released after publication according to the final data and code-sharing policy.
+> Anonymous-review note: for AAAI-style anonymous submission, this repository should be mirrored to an anonymous artifact service or an anonymized repository URL before being linked in the paper. Do not link a personal GitHub account, institutional account, or repository metadata that can identify the authors during review.
+
+> Release-scope note: the full model implementation, training objectives, checkpoints, and private clinical data are not included in this public release because the manuscript is under review and the work involves ongoing intellectual-property protection and restricted clinical data. The complete training code can be made available to reviewers under a confidential review process or released after publication according to the final data and code-sharing policy.
 
 ## What is included
 
@@ -21,7 +23,7 @@ RAAMR is designed for patient-level breast mammography classification under real
 - The full RAAMR model architecture.
 - The private Meta-Net, adaptive prompting, reliability routing, and fusion implementation.
 - Training checkpoints and pretrained weights.
-- Private FFDM, DBT, or pathology-report data.
+- Private FFDM, DBT, or radiology-report data.
 - Patient identifiers or real clinical report text.
 
 These components are intentionally omitted from the public release. The repository still exposes the experimental interface and evaluation protocol so that readers can inspect how inputs, outputs, and reported metrics are organized.
@@ -65,7 +67,7 @@ patient_id,label,split,L_CC,R_CC,L_MLO,R_MLO,DBT_L_CC,DBT_R_CC,DBT_L_MLO,DBT_R_M
 P000001,1,test,/path/L_CC.png,/path/R_CC.png,/path/L_MLO.png,/path/R_MLO.png,/path/dbt_lcc.png,,,,P000001
 ```
 
-Labels are binary:
+Labels are binary and are provided by the clinical site from real hospital cases in the private cohort:
 
 - `0`: benign or non-malignant
 - `1`: malignant
@@ -74,7 +76,7 @@ The public template intentionally uses placeholder paths. Do not upload private 
 
 ## Structured report template
 
-The full study uses structured report semantics extracted from Chinese clinical reports. In the private workflow, Chinese reports are summarized and normalized into structured fields before being used by the multimodal model. A public template is provided in `examples/structured_report_template.json`.
+The full study uses structured report semantics extracted from Chinese radiology reports. In the private workflow, Chinese reports are de-identified, summarized, and normalized into structured fields before being used by the multimodal model. Final diagnostic conclusions, pathology conclusions, and direct class-indicating words such as `malignant` and `benign` are removed before model input construction to reduce label leakage. A public template is provided in `examples/structured_report_template.json`.
 
 Example fields:
 
@@ -100,6 +102,14 @@ pip install -r requirements.txt
 ## Minimal usage
 
 The public release is intended to document the experimental interface rather than to reproduce the private training pipeline. Users can inspect the data schema, structured-report template, preprocessing utilities, and model input-output contract.
+
+## Evaluation protocol notes
+
+- Baseline models should be evaluated under the same patient-level train/validation/test split.
+- Image-only vision-language baselines should not use report text when comparing pretrained visual representations.
+- FFDM views and DBT-derived views should use the same view configuration and image resolution across methods.
+- DBT availability ratio is computed by view count as the number of available DBT-derived views divided by four expected standard views.
+- Reported table values may include standard errors (SE); the repository does not include private prediction files.
 
 ## Citation
 
